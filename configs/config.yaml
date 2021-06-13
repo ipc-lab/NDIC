@@ -1,0 +1,32 @@
+# Dataset parameters
+dataset_path: '.'
+resize: [128, 256]
+
+# Model parameters
+baseline_model: 'bls17' # can be bmshj18 for Variational image compression with a scale hyperprior by Ballé, et al.
+                          # or bls17 for End-to-end Optimized Image Compression by Ballé, et al.
+use_side_info: True # if True then the modified version of baseline model for distributed compression is used.
+num_filters: 192 # number of filters used in the baseline model network
+cuda: True
+load_weight: False
+weight_path: './pretrained_weights/balle17+ours_MS-SSIM_lambda3e-05.pt' # weight path for loading
+
+# Training parameters
+train: True
+epochs: 50000
+train_batch_size: 1
+lr: 0.0001
+lambda: 0.00003 # the lambda value in rate-distortion equation
+alpha: 1
+beta: 1
+distortion_loss: 'MS-SSIM' # can be MS-SSIM or MSE. selects the method by which the distortion is calculated during training
+verbose_period: 50 # this number determines the period (in terms of epoch count) of the console output. non-positive value indicates no verbose
+
+# Saving weights and results parameters
+save_weights: True
+save_output_path: './outputs' # path where results and weights will be saved
+experiment_name: 'bls17_with_side_info_MS-SSIM_lambda:3e-05'
+
+# Test parameters
+test: True
+save_image: True
