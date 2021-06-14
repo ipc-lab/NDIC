@@ -1,4 +1,6 @@
-##### Deep Stereo Image Compression with Decoder Side Information using Wyner Common Information
+### Deep Wyner Stereo Image Compression (DWSIC)
+
+##### Deep Stereo Image Compression with Decoder Side Information using Wyner Common Information [Paper]
 
 ![teaser](figs/teaser.png)
 
@@ -26,8 +28,8 @@ We present a novel deep neural network (DNN) architecture for compressing an ima
 ### Clone
 Clone this repository and enter the directory using the commands below:
 ```bash
-git clone https://github.com/ipc-lab/Deep_stereo_image_compression_with_Decoder_Side_Information_using_Wyner_Common-Information.git
-cd Deep_stereo_image_compression_with_Decoder_Side_Information_using_Wyner_Common-Information/
+git clone https://github.com/ipc-lab/DWSIC.git
+cd DWSIC/
 ```
 
 ### Requirements
