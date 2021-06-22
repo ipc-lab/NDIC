@@ -90,7 +90,7 @@ num_filters: 192 # number of filters used in the baseline model network
 cuda: True
 load_weight: False
 weight_path: './pretrained_weights/balle17+ours_MS-SSIM_lambda3e-05.pt' # weight path for loading the weight
-# note that we provide some pretrained weights, accessible from the anonymous link provided in README.md
+# note that we provide some pretrained weights, accessible from the link provided in README.md, under the title "Weights"
 ```
 
 `baseline_model` selects the compression model. The accepted models for this parameter are `'bmshj18'` for [Variational image compression with a scale hyperprior](https://arxiv.org/abs/1802.01436) and `'bls17'` for [End-to-end Optimized Image Compression](https://arxiv.org/abs/1611.01704). If `use_side_info` is set as `True`, then the baseline model is modified using our proposed method for using side information for compressing.
