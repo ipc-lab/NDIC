@@ -1,15 +1,14 @@
 ### Deep Wyner Stereo Image Compression (DWSIC)
 
-##### Deep Stereo Image Compression with Decoder Side Information using Wyner Common Information [Paper]
-
 ![teaser](figs/teaser.png)
 
 ![example](figs/example.png) 
 
-"Ballé2018" and "DSIN" refer to [Variational image compression with a scale hyperprior](https://arxiv.org/abs/1802.01436), [Deep Image Compression using Decoder Side Information](https://arxiv.org/abs/2001.04753), respectively. "Ours + Ballé2017" refers to our proposed model using "Ballé2017" model, which refers to [End-to-end Optimized Image Compression](https://arxiv.org/abs/1611.01704), as the baseline.
+"Ballé2018" and "DSIN" refer to [Variational image compression with a scale hyperprior](https://arxiv.org/abs/1802.01436), [Deep Image Compression using Decoder Side Information](https://arxiv.org/abs/2001.04753), respectively. "Ours" refers to our proposed model using "Ballé2017" model, which refers to [End-to-end Optimized Image Compression](https://arxiv.org/abs/1611.01704), as the baseline.
 
 
 ## Citation
+##### Deep Stereo Image Compression with Decoder Side Information using Wyner Common Information [Paper]
 ``` bash
 @article{
   title={Deep Stereo Image Compression with Decoder Side Information using Wyner Common Information},
