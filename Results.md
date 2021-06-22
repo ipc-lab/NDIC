@@ -5,7 +5,7 @@ Date: June 2, 2021.
 Here, we give more explanation about the parameters that we used for our plots in Figure 8. (a) and (b) in the main paper.
 
 
-![Results_plots](figs/res1.PNG) 
+![Results_plots](figs/results.png) 
 
 
 In Figure 8. (a) and (b), we used `MSE` and `MS-SSIM` distortion functions for neural network-based model trainings, respectively.
