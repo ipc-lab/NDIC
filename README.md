@@ -174,7 +174,7 @@ python main.py
 
 ![Results_plots](figs/res1.PNG) 
 
-In Figure 8. (a) and (b), we used `MSE` and `MS-SSIM` distortion functions for neural network-based model trainings, respectively.
+In Figure 8. (a) and (b), we used `MSE` and `MS-SSIM` distortion functions for neural network-based model trainings, respectively. The parameter lambda used to obtain the plotted points are given in `Results.md`.
 
 
 ### License
