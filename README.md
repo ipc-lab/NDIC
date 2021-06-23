@@ -1,4 +1,4 @@
-### Deep Wyner Stereo Image Compression (DWSIC)
+### Deep Wyner Stereo Image Compression (DWSIC) [[Paper]](https://arxiv.org/abs/2106.11723)
 
 ![teaser](figs/teaser.png)
 
@@ -10,13 +10,13 @@
 ## Citation
 ##### Deep Stereo Image Compression with Decoder Side Information using Wyner Common Information [Paper]
 ``` bash
-@article{
-  title={Deep Stereo Image Compression with Decoder Side Information using Wyner Common Information},
-  author={},
-  year={2021},
-  eprint={},
-  archivePrefix={},
-  primaryClass={}
+@misc{DWSIC,
+      title={Deep Stereo Image Compression with Decoder Side Information using Wyner Common Information}, 
+      author={Nitish Mital and Ezgi Ozyilkan and Ali Garjani and Deniz Gunduz},
+      year={2021},
+      eprint={2106.11723},
+      archivePrefix={arXiv},
+      primaryClass={eess.IV}
 }
 ```
 
