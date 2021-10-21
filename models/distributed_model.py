@@ -51,7 +51,7 @@ class HyperPriorDistributedAutoEncoder(nn.Module):
         self.entropy_bottleneck_common_info = entropy_model.EntropyBottleneck(num_filters, quantize=False)
 
         self.conditional_entropy_bottleneck_hx = ConditionalEntropyBottleneck()
-        self.conditional_entropy_bottleneck_hy = ConditionalEntropyBottleneck()
+        self.conditional_entropy_bottleneck_hy = ConditionalEntropyBottleneck(cor_input=True)
 
         self.deconv1 = nn.ConvTranspose2d(2 * num_filters, num_filters, 5, stride=2, padding=2, output_padding=1)
         self.igdn1 = gdn.GDN(num_filters, inverse=True)
