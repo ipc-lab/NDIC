@@ -8,6 +8,7 @@ import PIL.Image as Image
 from collections import OrderedDict
 from torch.utils.data import DataLoader
 from dataset.PairKitti import PairKitti
+from dataset.PairCityscape import PairCityscape
 from models.balle2018.model import BMSHJ2018Model
 from models.balle2017.model import BLS2017Model
 from models.distributed_model import HyperPriorDistributedAutoEncoder, DistributedAutoEncoder
@@ -86,11 +87,12 @@ def get_distortion(config, out, img, cor_img, mse):
 
     return distortion
 
-''' Since the pre-trained weights provided for bls17 by us were trained with
-    different layer names, we map the layer names in the state dictionaries
-    to the new names using the following function map_layers().
-'''
-def map_layers(weight):  
+
+def map_layers(weight):
+    """ Since the pre-trained weights provided for bls17 by us were trained with
+        different layer names, we map the layer names in the state dictionaries
+        to the new names using the following function map_layers().
+    """
     return OrderedDict([(k.replace('z', 'w'), v) if 'z' in k else (k, v) for k, v in weight.items()])
 
 
@@ -109,9 +111,16 @@ def main(config):
     # Dataset initialization
     path = config['dataset_path']
     resize = tuple(config['resize'])
-    train_dataset = PairKitti(path=path, set_type='train', resize=resize)
-    val_dataset = PairKitti(path=path, set_type='val', resize=resize)
-    test_dataset = PairKitti(path=path, set_type='test', resize=resize)
+    if config['dataset_name'] == 'KITTI':
+        train_dataset = PairKitti(path=path, set_type='train', resize=resize)
+        val_dataset = PairKitti(path=path, set_type='val', resize=resize)
+        test_dataset = PairKitti(path=path, set_type='test', resize=resize)
+    elif config['dataset_name'] == 'Cityscape':
+        train_dataset = PairCityscape(path=path, set_type='train', resize=resize)
+        val_dataset = PairCityscape(path=path, set_type='val', resize=resize)
+        test_dataset = PairCityscape(path=path, set_type='test', resize=resize)
+    else:
+        raise Exception("Dataset not found")
 
     batch_size = config['train_batch_size']
     train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True, num_workers=3)
@@ -283,7 +292,8 @@ def main(config):
                     cols[name].append(val)
 
                 if config['save_image']:
-                    save_image(x_recon[0], img[0], os.path.join(results_path, '{}_images'.format(experiment_name)), str(i))
+                    save_image(x_recon[0], img[0], os.path.join(results_path, '{}_images'.format(experiment_name)),
+                               str(i))
 
             df = pd.DataFrame.from_dict(cols)
             df.to_csv(os.path.join(results_path, experiment_name + '.csv'))

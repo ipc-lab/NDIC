@@ -1,5 +1,7 @@
 # Dataset parameters
-dataset_path: '.'
+dataset_name: 'KITTI' # the name of the dataset. it can be either KITTI or Cityscape
+dataset_path: '.' # for KITTI it's the txt files containing the real path of the images, and for Cityscape it's the path
+                  # to the directory that contains leftImg8bit and rightImg8bit folders
 resize: [128, 256]
 
 # Model parameters
