@@ -41,7 +41,9 @@ pip install -r requirements.txt
 If you're having issues with installing PyTorch compatible with your CUDA version, we strongly suggest you refer to [related documentation page](https://pytorch.org/get-started/previous-versions/).
 
 ### Dataset
-The dataset used for experiments is KITTI Stereo. You can download the necessary image pairs from [KITTI 2012](http://www.cvlibs.net/download.php?file=data_stereo_flow_multiview.zip) and [KITTI 2015](http://www.cvlibs.net/download.php?file=data_scene_flow_multiview.zip). After obtaining `data_stereo_flow_multiview.zip` and `data_scene_flow_multiview.zip`, run the following commands:
+The datasets used for experiments are KITTI Stereo and Cityscape.
+
+For KITTI Stereo you can download the necessary image pairs from [KITTI 2012](http://www.cvlibs.net/download.php?file=data_stereo_flow_multiview.zip) and [KITTI 2015](http://www.cvlibs.net/download.php?file=data_scene_flow_multiview.zip). After obtaining `data_stereo_flow_multiview.zip` and `data_scene_flow_multiview.zip`, run the following commands:
 ```bash
 unzip data_stereo_flow_multiview.zip # KITTI 2012
 mkdir data_stereo_flow_multiview
@@ -54,8 +56,17 @@ mv training data_scene_flow_multiview
 mv testing data_scene_flow_multiview
 ```
 
+For Cityscape you can download the image pairs from [here](https://www.cityscapes-dataset.com/downloads/). After downloading `leftImg8bit_trainvaltest.zip` and `rightImg8bit_trainvaltest.zip`, run the following commands:
+```bash
+mkdir cityscape_dataset
+unzip leftImg8bit_trainvaltest.zip
+mv leftImg8bit cityscape_dataset
+unzip rightImg8bit_trainvaltest.zip
+mv rightImg8bit cityscape_dataset
+```
+
 ### Weights
-Pre-trained models on the KITTI Stereo setup mentioned in the paper for "Ballé2017", "Ballé2018", "Ours + Ballé2017" and "Ours + Ballé2018" models, trained either wrt. MSE or MS-SSIM reconstruction loss, can be downloaded from this [link](https://drive.google.com/drive/folders/13Lk9DB3SeKutneQbYP_d5nXCa5DoRs4R?usp=sharing).
+Pre-trained models on the datasets mentioned in the paper for "Ballé2017", "Ballé2018", "Ours + Ballé2017" and "Ours + Ballé2018" models, trained either wrt. MSE or MS-SSIM reconstruction loss, can be downloaded from this [link](https://drive.google.com/drive/folders/13Lk9DB3SeKutneQbYP_d5nXCa5DoRs4R?usp=sharing).
 
 If desired, download the desired weights and put them in `pretrained_weights` folder and update the `configs/config.yaml` parameters accordingly. 
 
@@ -75,11 +86,13 @@ You can also use `Custom Configuration Notebook.ipynb` notebook to create your c
 
 - Dataset:
 ```yaml
-dataset_path: '.'
+dataset_name: 'KITTI' # the name of the dataset. it can be either KITTI or Cityscape
+dataset_path: '.' # for KITTI it's the txt files containing the real path of the images, and for Cityscape it's the path
+                  # to the directory that contains leftImg8bit and rightImg8bit folders
 resize: [128, 256]
 ```
 
-`dataset_path` shows the path to `data_paths` directory that contains every image and its pair path. The `resize` value selects the width, and the height dimensions that each image will be resized to.
+`dataset_name` is the name of the dataset which will be used in the model. In case of using KITTI `dataset_path` shows the path to `data_paths` directory that contains every image and its pair path, and for Cityscape it is the path to the directory that contains `leftImg8bit` and `rightImg8bit` folders. The `resize` value selects the width, and the height dimensions that each image will be resized to.
 
 - Model:
 ```yaml
