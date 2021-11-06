@@ -1,4 +1,4 @@
-### Deep Wyner Stereo Image Compression (DWSIC) [[Paper]](https://arxiv.org/abs/2106.11723)
+### Neural Distributed Image Compression using Common Information (NDIC) [[Paper]](https://arxiv.org/abs/2106.11723)
 
 ![teaser](figs/teaser.png)
 
@@ -10,8 +10,8 @@
 ## Citation
 ##### Deep Stereo Image Compression with Decoder Side Information using Wyner Common Information [Paper]
 ``` bash
-@misc{DWSIC,
-      title={Deep Stereo Image Compression with Decoder Side Information using Wyner Common Information}, 
+@misc{NDIC,
+      title={Neural Distributed Image Compression using Common Information}, 
       author={Nitish Mital and Ezgi Ozyilkan and Ali Garjani and Deniz Gunduz},
       year={2021},
       eprint={2106.11723},
@@ -21,14 +21,14 @@
 ```
 
 ## Abstract
-We present a novel deep neural network (DNN) architecture for compressing an image when a correlated image is available as side information only at the decoder. This problem is known as distributed source coding (DSC) in information theory. In particular, we consider a pair of stereo images, which generally have high correlation with each other due to overlapping fields of view, and assume that one image of the pair is to be compressed and transmitted, while the other image is available only at the decoder. In the proposed architecture, the encoder maps the input image to a latent space, quantizes the latent representation, and compresses it using entropy coding. The decoder is trained to extract the Wyner's common information between the input image and the correlated image from the latter. The received latent representation and the locally generated common information are passed through a decoder network to obtain an enhanced reconstruction of the input image. The common information provides a succinct representation of the relevant information at the receiver. We train and demonstrate the effectiveness of the proposed approach on the KITTI dataset of stereo image pairs. Our results show that the proposed architecture is capable of exploiting the decoder-only side information, and outperforms previous work on stereo image compression with decoder side information.
+We present a novel deep neural network (DNN) architecture for compressing an image when a correlated image is available as side information only at the decoder. This problem is known as distributed source coding (DSC) in information theory. In particular, we consider a pair of stereo images, which generally have high correlation with each other due to overlapping fields of view, and assume that one image of the pair is to be compressed and transmitted, while the other image is available only at the decoder. In the proposed architecture, the encoder maps the input image to a latent space, quantizes the latent representation, and compresses it using entropy coding. The decoder is trained to extract the common information between the input image and the correlated image, using only the latter. The received latent representation and the locally generated common information are passed through a decoder network to obtain an enhanced reconstruction of the input image. The common information provides a succinct representation of the relevant information at the receiver. We train and demonstrate the effectiveness of the proposed approach on the KITTI and Cityscape datasets of stereo image pairs. Our results show that the proposed architecture is capable of exploiting the decoder-only side information, and outperforms previous work on stereo image compression with decoder side information.
 
 ## Usage
 ### Clone
 Clone this repository and enter the directory using the commands below:
 ```bash
-git clone https://github.com/ipc-lab/DWSIC.git
-cd DWSIC/
+git clone https://github.com/ipc-lab/NDIC.git
+cd NDIC/
 ```
 
 ### Requirements
@@ -41,7 +41,9 @@ pip install -r requirements.txt
 If you're having issues with installing PyTorch compatible with your CUDA version, we strongly suggest you refer to [related documentation page](https://pytorch.org/get-started/previous-versions/).
 
 ### Dataset
-The dataset used for experiments is KITTI Stereo. You can download the necessary image pairs from [KITTI 2012](http://www.cvlibs.net/download.php?file=data_stereo_flow_multiview.zip) and [KITTI 2015](http://www.cvlibs.net/download.php?file=data_scene_flow_multiview.zip). After obtaining `data_stereo_flow_multiview.zip` and `data_scene_flow_multiview.zip`, run the following commands:
+The datasets used for experiments are KITTI Stereo and Cityscape.
+
+For KITTI Stereo you can download the necessary image pairs from [KITTI 2012](http://www.cvlibs.net/download.php?file=data_stereo_flow_multiview.zip) and [KITTI 2015](http://www.cvlibs.net/download.php?file=data_scene_flow_multiview.zip). After obtaining `data_stereo_flow_multiview.zip` and `data_scene_flow_multiview.zip`, run the following commands:
 ```bash
 unzip data_stereo_flow_multiview.zip # KITTI 2012
 mkdir data_stereo_flow_multiview
@@ -54,8 +56,17 @@ mv training data_scene_flow_multiview
 mv testing data_scene_flow_multiview
 ```
 
+For Cityscape you can download the image pairs from [here](https://www.cityscapes-dataset.com/downloads/). After downloading `leftImg8bit_trainvaltest.zip` and `rightImg8bit_trainvaltest.zip`, run the following commands:
+```bash
+mkdir cityscape_dataset
+unzip leftImg8bit_trainvaltest.zip
+mv leftImg8bit cityscape_dataset
+unzip rightImg8bit_trainvaltest.zip
+mv rightImg8bit cityscape_dataset
+```
+
 ### Weights
-Pre-trained models on the KITTI Stereo setup mentioned in the paper for "Ballé2017", "Ballé2018", "Ours + Ballé2017" and "Ours + Ballé2018" models, trained either wrt. MSE or MS-SSIM reconstruction loss, can be downloaded from this [link](https://drive.google.com/drive/folders/13Lk9DB3SeKutneQbYP_d5nXCa5DoRs4R?usp=sharing).
+Pre-trained models on the datasets mentioned in the paper for "Ballé2017", "Ballé2018", "Ours + Ballé2017" and "Ours + Ballé2018" models, trained either wrt. MSE or MS-SSIM reconstruction loss, can be downloaded from this [link](https://drive.google.com/drive/folders/13Lk9DB3SeKutneQbYP_d5nXCa5DoRs4R?usp=sharing).
 
 If desired, download the desired weights and put them in `pretrained_weights` folder and update the `configs/config.yaml` parameters accordingly. 
 
@@ -75,11 +86,13 @@ You can also use `Custom Configuration Notebook.ipynb` notebook to create your c
 
 - Dataset:
 ```yaml
-dataset_path: '.'
+dataset_name: 'KITTI' # the name of the dataset. it can be either KITTI or Cityscape
+dataset_path: '.' # for KITTI it's the txt files containing the real path of the images, and for Cityscape it's the path
+                  # to the directory that contains leftImg8bit and rightImg8bit folders
 resize: [128, 256]
 ```
 
-`dataset_path` shows the path to `data_paths` directory that contains every image and its pair path. The `resize` value selects the width, and the height dimensions that each image will be resized to.
+`dataset_name` is the name of the dataset which will be used in the model. In case of using KITTI, `dataset_path` shows the path to `data_paths` directory that contains every image and its pair path, and for Cityscape it is the path to the directory that contains `leftImg8bit` and `rightImg8bit` folders. The `resize` value selects the width, and the height dimensions that each image will be resized to.
 
 - Model:
 ```yaml
@@ -89,7 +102,7 @@ use_side_info: True # if True then the modified version of baseline model for di
 num_filters: 192 # number of filters used in the baseline model network
 cuda: True
 load_weight: False
-weight_path: './pretrained_weights/balle17+ours_MS-SSIM_lambda3e-05.pt' # weight path for loading the weight
+weight_path: './pretrained_weights/ours+balle17_MS-SSIM_lambda3e-05.pt' # weight path for loading the weight
 # note that we provide some pretrained weights, accessible from the link provided in README.md, under the title "Weights"
 ```
 
@@ -121,7 +134,7 @@ save_output_path: './outputs' # path where results and weights will be saved
 experiment_name: 'bls17_with_side_info_MS-SSIM_lambda:3e-05'
 ```
 
-If you wish to save the model weights after training set `save_weights` `True`. `save_output_path` shows the directory path where the model weights are saved.
+If you wish to save the model weights after training, set `save_weights` `True`. `save_output_path` shows the directory path where the model weights are saved.
 For the weights, in `save_output_path` a `weight` folder will be created, and the weights will be saved there with the name according to `experiment_name`. 
 
 - Test:
@@ -170,11 +183,11 @@ python main.py
 ```
 
 
-### Results on KITTI Stereo
+### Results on datasets
 
 ![Results_plots](figs/results.png) 
 
-In Figure 8. (a) and (b), we used `MSE` and `MS-SSIM` distortion functions for training the models, respectively. The values of the parameter lambda for the DNN models, and the values of the quality parameter for BPG and JPEG2000, used to obtain the plotted points are given in `Results.md`.
+In figure above, we used `MSE` and `MS-SSIM` distortion functions for training the models, respectively. The values of the parameter lambda for the DNN models, and the values of the quality parameter for BPG, used to obtain the plotted points are given in `Results.md`.
 
 
 ### License
