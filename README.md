@@ -169,7 +169,7 @@ experiment_name: '...' # a handle for the saved results of the inference
 ```
 
 Also, change `baseline_model` and `use_side_info` parameters in `configs/config.yaml` accordingly.
-For example, for the `balle2017+ours` weights, these parameters should be: 
+For example, for the `ours+balle2017` weights, these parameters should be: 
 
 ```yaml
 baseline_model: 'bls17'
