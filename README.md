@@ -8,7 +8,6 @@
 
 
 ## Citation
-##### Deep Stereo Image Compression with Decoder Side Information using Wyner Common Information [Paper]
 ``` bash
 @misc{NDIC,
       title={Neural Distributed Image Compression using Common Information}, 
