@@ -102,7 +102,7 @@ use_side_info: True # if True then the modified version of baseline model for di
 num_filters: 192 # number of filters used in the baseline model network
 cuda: True
 load_weight: False
-weight_path: './pretrained_weights/balle17+ours_MS-SSIM_lambda3e-05.pt' # weight path for loading the weight
+weight_path: './pretrained_weights/ours+balle17_MS-SSIM_lambda3e-05.pt' # weight path for loading the weight
 # note that we provide some pretrained weights, accessible from the link provided in README.md, under the title "Weights"
 ```
 
