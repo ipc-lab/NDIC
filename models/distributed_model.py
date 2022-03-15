@@ -107,7 +107,7 @@ class HyperPriorDistributedAutoEncoder(nn.Module):
         x = self.igdn1(x)
         x = self.deconv2(x)
         x = self.igdn2(x)
-        x = self.deconv2(x)
+        x = self.deconv3(x)
         x = self.igdn3(x)
         x = self.deconv4(x)
 
@@ -119,7 +119,7 @@ class HyperPriorDistributedAutoEncoder(nn.Module):
         x = self.igdn1_cor(x)
         x = self.deconv2_cor(x)
         x = self.igdn2_cor(x)
-        x = self.deconv2_cor(x)
+        x = self.deconv3_cor(x)
         x = self.igdn3_cor(x)
         x = self.deconv4_cor(x)
 
@@ -245,7 +245,7 @@ class DistributedAutoEncoder(nn.Module):
         x = self.igdn1(x)
         x = self.deconv2(x)
         x = self.igdn2(x)
-        x = self.deconv2(x)
+        x = self.deconv3(x)
         x = self.igdn3(x)
         x = self.deconv4(x)
         return x
@@ -256,7 +256,7 @@ class DistributedAutoEncoder(nn.Module):
         x = self.igdn1_cor(x)
         x = self.deconv2_cor(x)
         x = self.igdn2_cor(x)
-        x = self.deconv2_cor(x)
+        x = self.deconv3_cor(x)
         x = self.igdn3_cor(x)
         x = self.deconv4_cor(x)
         return x
