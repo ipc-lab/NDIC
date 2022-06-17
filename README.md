@@ -1,5 +1,8 @@
 ### Neural Distributed Image Compression using Common Information (NDIC) [[Paper]](https://arxiv.org/abs/2106.11723)
 
+>This repo is the official PyTorch implementation of the Neural Distributed Image Compression using Common Information paper.<br>
+> In Data Compression Conference (DCC) 2022
+
 ![teaser](figs/teaser.png)
 
 ![example](figs/example.png) 
@@ -9,13 +12,13 @@
 
 ## Citation
 ``` bash
-@misc{NDIC,
-      title={Neural Distributed Image Compression using Common Information}, 
-      author={Nitish Mital and Ezgi Ozyilkan and Ali Garjani and Deniz Gunduz},
-      year={2021},
-      eprint={2106.11723},
-      archivePrefix={arXiv},
-      primaryClass={eess.IV}
+@misc{
+    6268-22,
+    url = {https://sigport.org/documents/neural-distributed-image-compression-using-common-information-0},
+    author = {Nitish Mital; Ezgi Ozyilkan; Ali Garjani; Deniz Gunduz },
+    publisher = {IEEE Signal Processing Society SigPort},
+    title = {Neural Distributed Image Compression Using Common Information},
+    year = {2022}
 }
 ```
 
