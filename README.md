@@ -12,14 +12,15 @@
 
 ## Citation
 ``` bash
-@misc{
-    6268-22,
-    url = {https://sigport.org/documents/neural-distributed-image-compression-using-common-information-0},
-    author = {Nitish Mital; Ezgi Ozyilkan; Ali Garjani; Deniz Gunduz },
-    publisher = {IEEE Signal Processing Society SigPort},
-    title = {Neural Distributed Image Compression Using Common Information},
-    year = {2022}
-}
+@INPROCEEDINGS{9810729,
+               author={Mital, Nitish and Özyılkan, Ezgi and Garjani, Ali and Gündüz, Deniz},  
+               booktitle={2022 Data Compression Conference (DCC)},   
+               title={Neural Distributed Image Compression Using Common Information},   
+               year={2022},  
+               volume={},  
+               number={},  
+               pages={182-191},  
+               doi={10.1109/DCC52660.2022.00026}}
 ```
 
 ## Abstract
